@@ -1,0 +1,14 @@
+services:
+  cookcli:
+    image: ghcr.io/cooklang/cookcli:latest
+    container_name: cookcli-recettes
+    entrypoint: ["cook"]
+    command: ["server", "/recipes", "--host"]
+    read_only: true
+    tmpfs:
+      - /tmp
+    ports:
+      - "9080:9080"
+    volumes:
+      - ./:/recipes:ro
+    restart: unless-stopped
